@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile | ChatSphere</title>
+
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="css/app-extras.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+<div class="profile-container">
+
+    <header class="profile-header">
+        <h2><i class="fas fa-comments"></i> ChatSphere</h2>
+        <a href="index.html">Back to Chats</a>
+    </header>
+
+    <main class="profile-card">
+
+        <div class="profile-cover"></div>
+
+        <div class="profile-avatar">
+            <img
+                id="profileImage"
+                src="https://i.pravatar.cc/150?img=12"
+                alt="Profile">
+        </div>
+
+        <div class="profile-details">
+
+            <h1 id="profileName">Loading...</h1>
+            <p id="profileEmail">Loading...</p>
+
+            <span class="profile-status">
+                <span class="online-dot"></span>
+                ChatSphere Member
+            </span>
+
+            <div class="profile-bio">
+                <h3>About Me</h3>
+                <p id="profileBio">No bio added yet.</p>
+            </div>
+
+            <div class="profile-actions">
+                <button type="button" id="editProfileBtn">
+                    <i class="fas fa-pen"></i> Edit Profile
+                </button>
+
+                <button type="button" id="useGooglePhotoBtn" hidden>
+                    <i class="fab fa-google"></i> Use Google photo
+                </button>
+
+                <button type="button" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+
+            <form id="profileForm" class="profile-form" hidden>
+
+                <label>
+                    Display name
+                    <input type="text" id="editName" maxlength="80" required>
+                </label>
+
+                <label>
+                    Bio
+                    <textarea id="editBio" maxlength="300" rows="3"></textarea>
+                </label>
+
+                <label>
+                    Profile picture (PNG, JPG, WEBP or GIF, max 2 MB)
+                    <input type="file" id="editAvatar"
+                           accept="image/png,image/jpeg,image/webp,image/gif">
+                </label>
+
+                <div class="profile-form-actions">
+                    <button type="submit" id="saveProfileBtn">Save</button>
+                    <button type="button" id="cancelEditBtn">Cancel</button>
+                </div>
+
+            </form>
+
+            <p id="profileMessage"></p>
+
+            <p class="profile-note">
+                <i class="fas fa-lock"></i>
+                Messages and files are end-to-end encrypted. Keys are kept in this browser.
+            </p>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script>
+<script src="js/profile.js"></script>
+
+</body>
+</html>

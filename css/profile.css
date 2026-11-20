@@ -1,0 +1,138 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f3f1ff;
+    min-height: 100vh;
+    padding: 25px;
+}
+
+.profile-container {
+    max-width: 950px;
+    margin: auto;
+}
+
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+}
+
+.profile-header h2 {
+    color: #30246c;
+}
+
+.profile-header h2 i {
+    color: #6554f5;
+}
+
+.profile-header a {
+    text-decoration: none;
+    color: #6554f5;
+    font-weight: 600;
+}
+
+.profile-card {
+    background: white;
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px #30246c18;
+    text-align: center;
+}
+
+.profile-cover {
+    height: 190px;
+    background: linear-gradient(120deg, #30246c, #7863ff);
+}
+
+.profile-avatar {
+    margin-top: -75px;
+    position: relative;
+}
+
+.profile-avatar img {
+    width: 145px;
+    height: 145px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 7px solid white;
+    background: white;
+}
+
+.profile-details {
+    padding: 15px 35px 45px;
+}
+
+.profile-details h1 {
+    color: #272343;
+    font-size: 27px;
+}
+
+.profile-details > p {
+    color: #88869e;
+    margin-top: 7px;
+}
+
+.profile-status {
+    display: inline-block;
+    margin-top: 15px;
+    background: #e7f8ed;
+    color: #209b5a;
+    border-radius: 20px;
+    padding: 8px 17px;
+    font-size: 12px;
+}
+
+.online-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #26bb69;
+    border-radius: 50%;
+    margin-right: 6px;
+}
+
+.profile-bio {
+    margin: 35px auto;
+    max-width: 450px;
+    padding: 22px;
+    background: #f7f6ff;
+    border-radius: 15px;
+}
+
+.profile-bio h3 {
+    color: #6554f5;
+    margin-bottom: 10px;
+}
+
+.profile-bio p {
+    color: #77758e;
+    font-size: 14px;
+}
+
+.profile-actions button {
+    padding: 13px 30px;
+    border: none;
+    border-radius: 12px;
+    color: white;
+    background: #6554f5;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.profile-actions button:hover {
+    background: #5140d9;
+}
+
+#profileMessage {
+    font-size: 13px;
+    margin-top: 15px;
+}

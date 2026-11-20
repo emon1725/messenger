@@ -1,0 +1,743 @@
+/* ==========================================
+   CHATSPHERE - additions for the Supabase version
+   Loaded after style.css / profile.css / auth.css.
+   ========================================== */
+
+[hidden] {
+    display: none !important;
+}
+
+/* Empty-state and status notes in the chat list and message area */
+.list-note {
+    padding: 18px 16px;
+    font-size: 14px;
+    text-align: center;
+    color: var(--muted, #9290a5);
+}
+
+/* Profile edit form */
+.profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin: 22px auto 0;
+    max-width: 450px;
+    text-align: left;
+}
+
+.profile-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #30246c;
+}
+
+.profile-form input,
+.profile-form textarea {
+    padding: 11px 13px;
+    border: 1px solid #d9d5f5;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 400;
+    color: #272343;
+    background: #ffffff;
+}
+
+.profile-form input[type="file"] {
+    padding: 8px;
+    font-size: 13px;
+}
+
+.profile-form textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.profile-form input:focus,
+.profile-form textarea:focus {
+    outline: none;
+    border-color: #6554f5;
+}
+
+.profile-form-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.profile-form-actions button {
+    padding: 12px 26px;
+    border: none;
+    border-radius: 12px;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    background: #6554f5;
+    color: #ffffff;
+}
+
+.profile-form-actions button:hover {
+    background: #5140d9;
+}
+
+.profile-form-actions button[type="button"] {
+    background: #ece9fb;
+    color: #30246c;
+}
+
+.profile-form-actions button[type="button"]:hover {
+    background: #ddd8f7;
+}
+
+.profile-form-actions button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+#profileMessage.success {
+    color: #209b5a;
+}
+
+#profileMessage.error {
+    color: #e04455;
+}
+
+.profile-note {
+    margin-top: 14px;
+    font-size: 13px;
+    text-align: center;
+    color: var(--muted, #9290a5);
+}
+
+.profile-note i {
+    color: #6554f5;
+}
+
+
+/* ---------- Sidebar: header buttons and active status ---------- */
+
+.list-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.chat-avatar {
+    position: relative;
+}
+
+.chat-avatar.is-online::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #209b5a;
+    border: 2px solid #ffffff;
+}
+
+.group-icon {
+    font-size: 12px;
+    color: #6554f5;
+    margin-right: 4px;
+}
+
+
+/* ---------- Messages: sender, meta, unsend, locked and unsent states ---------- */
+
+.message-sender {
+    display: block;
+    margin-bottom: 2px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #6554f5;
+}
+
+.message-meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--muted, #9290a5);
+}
+
+.message-row.sent .message-meta {
+    justify-content: flex-end;
+}
+
+.message-text {
+    display: block;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.message-bubble.unsent,
+.message-bubble.locked {
+    font-style: italic;
+    opacity: 0.75;
+}
+
+.unsend-btn {
+    border: none;
+    background: none;
+    color: var(--muted, #9290a5);
+    cursor: pointer;
+    opacity: 0;
+    padding: 2px 4px;
+    transition: opacity 0.15s ease;
+}
+
+.message-row:hover .unsend-btn,
+.unsend-btn:focus {
+    opacity: 1;
+}
+
+.unsend-btn:hover {
+    color: #e04455;
+}
+
+.upload-status {
+    padding: 4px 18px;
+    font-size: 13px;
+    color: var(--muted, #9290a5);
+}
+
+/* File bubbles */
+
+.file-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.message-image {
+    display: block;
+    max-width: 240px;
+    max-height: 260px;
+    border-radius: 12px;
+    cursor: pointer;
+    background: rgba(101, 84, 245, 0.08);
+}
+
+.file-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+}
+
+.file-name {
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 600;
+}
+
+.file-size {
+    opacity: 0.7;
+}
+
+.file-download {
+    border: none;
+    background: none;
+    color: inherit;
+    cursor: pointer;
+    padding: 2px 4px;
+}
+
+/* Emoji panel */
+
+.emoji-panel {
+    margin: 0 16px 8px;
+    padding: 8px;
+    max-height: 180px;
+    overflow-y: auto;
+    border: 1px solid #d9d5f5;
+    border-radius: 14px;
+    background: #ffffff;
+}
+
+.emoji-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 4px;
+}
+
+.emoji-btn {
+    border: none;
+    background: none;
+    font-size: 22px;
+    line-height: 1;
+    padding: 6px 0;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.emoji-btn:hover {
+    background: #f3f1fd;
+}
+
+
+/* ---------- Modals (groups) ---------- */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    background: rgba(20, 16, 50, 0.45);
+}
+
+.modal-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: min(460px, 100%);
+    max-height: 86vh;
+    overflow-y: auto;
+    padding: 22px;
+    border-radius: 18px;
+    background: var(--surface, #ffffff);
+    color: var(--text, #272343);
+    box-shadow: 0 20px 50px rgba(20, 16, 50, 0.25);
+}
+
+.modal-card h3 {
+    margin: 0;
+    color: #30246c;
+}
+
+.modal-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #30246c;
+}
+
+.modal-field input {
+    padding: 11px 13px;
+    border: 1px solid #d9d5f5;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 400;
+    color: #272343;
+    background: #ffffff;
+}
+
+.modal-field input:focus {
+    outline: none;
+    border-color: #6554f5;
+}
+
+.modal-subtitle {
+    margin: 0;
+    font-size: 13px;
+    color: var(--muted, #9290a5);
+}
+
+.modal-message {
+    margin: 0;
+    min-height: 16px;
+    font-size: 13px;
+    color: #e04455;
+}
+
+.modal-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.modal-actions button,
+.btn-secondary,
+.btn-danger {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 12px;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    background: #6554f5;
+    color: #ffffff;
+}
+
+.modal-actions .btn-secondary,
+.btn-secondary {
+    background: #ece9fb;
+    color: #30246c;
+}
+
+.modal-actions .btn-danger,
+.btn-danger {
+    background: #e04455;
+}
+
+.modal-actions button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.picker-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.picker-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 999px;
+    background: #ece9fb;
+    color: #30246c;
+    font-family: inherit;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.picker-results {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-height: 220px;
+    overflow-y: auto;
+}
+
+.picker-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px;
+    border: none;
+    border-radius: 10px;
+    background: transparent;
+    color: #272343;
+    font-family: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+.picker-row:hover:not(:disabled) {
+    background: #f3f1fd;
+}
+
+.picker-row:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.picker-row img {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.picker-row > i {
+    font-size: 18px;
+    color: #6554f5;
+}
+
+.picker-name {
+    flex: 1;
+    font-weight: 600;
+}
+
+.picker-note {
+    font-size: 12px;
+    color: var(--muted, #9290a5);
+}
+
+.member-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-height: 320px;
+    overflow-y: auto;
+}
+
+.member-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 12px;
+    background: #f8f7fe;
+}
+
+.member-row > img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.member-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.member-name {
+    font-weight: 600;
+    color: #272343;
+}
+
+.member-badge {
+    width: fit-content;
+    padding: 1px 6px;
+    border-radius: 6px;
+    background: #6554f5;
+    color: #ffffff;
+    font-size: 11px;
+}
+
+.member-presence {
+    font-size: 12px;
+    color: var(--muted, #9290a5);
+}
+
+.member-remove {
+    padding: 6px 10px;
+    border: 1px solid #e04455;
+    border-radius: 10px;
+    background: none;
+    color: #e04455;
+    font-family: inherit;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+
+/* ---------- Calls ---------- */
+
+.call-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(15, 12, 40, 0.7);
+}
+
+.call-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: min(320px, 92%);
+    padding: 28px;
+    border-radius: 22px;
+    background: #ffffff;
+    color: #272343;
+    text-align: center;
+}
+
+.call-card img {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.call-card p {
+    margin: 0;
+    color: var(--muted, #9290a5);
+}
+
+.call-actions {
+    display: flex;
+    gap: 24px;
+    margin-top: 14px;
+}
+
+.call-btn {
+    width: 60px;
+    height: 60px;
+    border: none;
+    border-radius: 50%;
+    color: #ffffff;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.call-btn.accept {
+    background: #209b5a;
+}
+
+.call-btn.decline {
+    background: #e04455;
+}
+
+.call-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 70;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #111029;
+    color: #ffffff;
+    overflow: hidden;
+}
+
+.call-screen video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background: #000000;
+}
+
+/* Audio calls keep the media elements playing but hide them. */
+.call-screen.audio-only video {
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+
+.call-screen #localVideo {
+    inset: auto;
+    top: 18px;
+    right: 18px;
+    width: 140px;
+    height: 190px;
+    border-radius: 14px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    z-index: 2;
+}
+
+.call-screen.audio-only #localVideo {
+    display: none;
+}
+
+.call-center {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.call-center img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.call-screen:not(.audio-only) #callAvatar {
+    display: none;
+}
+
+.call-center p {
+    margin: 0;
+    opacity: 0.85;
+}
+
+.call-controls {
+    position: absolute;
+    bottom: 28px;
+    z-index: 2;
+    display: flex;
+    gap: 16px;
+}
+
+.call-controls button {
+    width: 56px;
+    height: 56px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.18);
+    color: #ffffff;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.call-controls button.off {
+    background: #ffffff;
+    color: #111029;
+}
+
+
+/* ---------- Toast ---------- */
+
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: 22px;
+    z-index: 80;
+    transform: translateX(-50%);
+    max-width: 90%;
+    padding: 12px 18px;
+    border-radius: 12px;
+    background: #272343;
+    color: #ffffff;
+    font-size: 14px;
+    box-shadow: 0 10px 30px rgba(20, 16, 50, 0.3);
+}
+
+
+/* ---------- Google sign in (login and signup pages) ---------- */
+
+.oauth-divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 14px 0;
+    font-size: 13px;
+    color: var(--muted, #9290a5);
+}
+
+.oauth-divider::before,
+.oauth-divider::after {
+    content: "";
+    flex: 1;
+    border-top: 1px solid #d9d5f5;
+}
+
+.google-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px;
+    border: 1px solid #d9d5f5;
+    border-radius: 12px;
+    background: #ffffff;
+    color: #272343;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.google-btn:hover {
+    background: #f8f7fe;
+}
+
+.google-btn i {
+    color: #ea4335;
+}

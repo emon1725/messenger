@@ -1,0 +1,469 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ChatSphere | Messaging App</title>
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/app-extras.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="app-container">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <!-- BRAND -->
+            <div class="brand">
+                <div class="brand-icon">
+                    <i class="fas fa-comments"></i>
+                </div>
+
+                <div>
+                    <h2>ChatSphere</h2>
+                    <span>Connect • Chat • Share</span>
+                </div>
+            </div>
+
+
+            <!-- USER PROFILE -->
+            <div class="sidebar-profile">
+
+                <img
+                    id="sidebarAvatar"
+                    src="https://i.pravatar.cc/150?img=12"
+                    alt="User Profile">
+
+                <div class="profile-info">
+                    <h3 id="sidebarName">Loading...</h3>
+                    <span>
+                        <span class="online-dot"></span>
+                        Online
+                    </span>
+                </div>
+
+                <button class="profile-menu" id="profileMenuBtn"
+                    title="Open Profile">
+                    <i class="fas fa-ellipsis-vertical"></i>
+                </button>
+
+            </div>
+
+
+            <!-- NAVIGATION -->
+            <nav class="main-navigation">
+
+                <button class="nav-item active" data-section="messages">
+                    <i class="far fa-comment-dots"></i>
+                    <span>Messages</span>
+                    <span class="nav-count" id="navUnreadCount" hidden>0</span>
+                </button>
+
+                <button class="nav-item" data-section="contacts">
+                    <i class="fas fa-users"></i>
+                    <span>Contacts</span>
+                </button>
+
+                <button class="nav-item" data-section="groups">
+                    <i class="fas fa-user-group"></i>
+                    <span>Groups</span>
+                </button>
+
+                <button class="nav-item" data-section="calls">
+                    <i class="fas fa-phone"></i>
+                    <span>Calls</span>
+                </button>
+
+                <button class="nav-item" data-section="settings">
+                    <i class="fas fa-gear"></i>
+                    <span>Settings</span>
+                </button>
+
+            </nav>
+
+
+            <!-- SIDEBAR DIVIDER -->
+            <div class="sidebar-divider"></div>
+
+
+            <!-- CHAT LIST HEADER -->
+            <div class="chat-list-header">
+
+                <h3 id="listTitle">Messages</h3>
+
+                <div class="list-header-actions">
+                    <button id="newGroupBtn" title="New Group">
+                        <i class="fas fa-user-group"></i>
+                    </button>
+
+                    <button id="newChatBtn" title="New Chat">
+                        <i class="fas fa-pen-to-square"></i>
+                    </button>
+                </div>
+
+            </div>
+
+
+            <!-- SEARCH -->
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+
+                <input
+                    type="text"
+                    id="searchChats"
+                    placeholder="Search chats...">
+            </div>
+
+
+            <!-- CHAT LIST (filled from Supabase by js/script.js) -->
+            <div class="chat-list" id="chatList">
+                <p class="list-note">Loading conversations...</p>
+            </div>
+
+
+            <!-- SIDEBAR FOOTER -->
+            <div class="sidebar-footer">
+
+                <button id="helpBtn">
+                    <i class="fas fa-circle-question"></i>
+                    Help & Support
+                </button>
+
+                <button class="logout-btn" id="logoutBtn">
+                    <i class="fas fa-right-from-bracket"></i>
+                    Logout
+                </button>
+
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+
+            <!-- TOP HEADER -->
+            <header class="top-header">
+
+                <div class="header-title">
+                    <h2 id="sectionHeading">Messages</h2>
+                    <p id="sectionSubtitle">
+                        Stay connected with your people.
+                    </p>
+                </div>
+
+                <div class="header-actions">
+
+                    <button class="header-icon" id="notificationBtn"
+                        title="Notifications">
+                        <i class="far fa-bell"></i>
+                        <span class="notification-dot"></span>
+                    </button>
+
+                    <button class="header-icon" id="themeBtn"
+                        title="Toggle Theme">
+                        <i class="far fa-moon"></i>
+                    </button>
+
+                    <button class="header-profile" id="headerProfileBtn">
+                        <img
+                            id="headerAvatar"
+                            src="https://i.pravatar.cc/150?img=12"
+                            alt="Profile">
+
+                        <span id="headerName">Loading...</span>
+
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+
+                </div>
+
+            </header>
+
+
+            <!-- MESSAGING WORKSPACE -->
+            <section class="messaging-workspace">
+
+                <!-- WELCOME PANEL -->
+                <div class="welcome-panel" id="welcomePanel">
+
+                    <div class="welcome-content">
+
+                        <div class="welcome-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+
+                        <h2>Welcome to ChatSphere!</h2>
+
+                        <p>
+                            Select a conversation from the sidebar
+                            and start connecting with your people.
+                        </p>
+
+                        <button id="startChatBtn">
+                            <i class="fas fa-plus"></i>
+                            Start a Conversation
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CHAT WINDOW -->
+                <div class="chat-window" id="chatWindow" hidden>
+
+                    <!-- CHAT HEADER -->
+                    <div class="conversation-header">
+
+                        <div class="conversation-user">
+
+                            <img id="conversationAvatar"
+                                src="https://i.pravatar.cc/150?img=47"
+                                alt="Contact">
+
+                            <div>
+                                <h3 id="conversationName" title="Group info"></h3>
+
+                                <span id="conversationStatus"></span>
+                            </div>
+
+                        </div>
+
+                        <div class="conversation-actions">
+
+                            <button title="Voice Call" id="voiceCallBtn">
+                                <i class="fas fa-phone"></i>
+                            </button>
+
+                            <button title="Video Call" id="videoCallBtn">
+                                <i class="fas fa-video"></i>
+                            </button>
+
+                            <button title="More Options" id="moreChatBtn">
+                                <i class="fas fa-ellipsis-vertical"></i>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- MESSAGES (filled from Supabase by js/script.js) -->
+                    <div class="messages-area" id="messagesArea"></div>
+
+
+                    <!-- UPLOAD STATUS -->
+                    <p class="upload-status" id="uploadStatus" hidden></p>
+
+
+                    <!-- EMOJI PANEL -->
+                    <div class="emoji-panel" id="emojiPanel" hidden></div>
+
+
+                    <!-- MESSAGE INPUT -->
+                    <div class="message-input-area">
+
+                        <button id="emojiBtn" title="Emoji">
+                            <i class="far fa-face-smile"></i>
+                        </button>
+
+                        <button id="attachmentBtn" title="Attach File">
+                            <i class="fas fa-paperclip"></i>
+                        </button>
+
+                        <input
+                            type="text"
+                            id="messageInput"
+                            maxlength="4000"
+                            placeholder="Type your message...">
+
+                        <button id="sendBtn" title="Send Message">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+
+                    </div>
+
+                    <input type="file" id="fileInput" hidden>
+
+                </div>
+
+
+                <!-- OTHER SECTIONS -->
+                <div class="other-section" id="otherSection" hidden>
+
+                    <div class="other-section-card">
+
+                        <div class="other-section-icon">
+                            <i class="fas fa-users" id="otherSectionIcon"></i>
+                        </div>
+
+                        <h2 id="otherSectionTitle">Contacts</h2>
+
+                        <p id="otherSectionDescription">
+                            Your contacts will appear here.
+                        </p>
+
+                        <span class="coming-soon">
+                            Feature coming soon
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- FOOTER -->
+            <footer class="app-footer">
+                <p>
+                    © 2026 ChatSphere.
+                    Connect • Chat • Share.
+                </p>
+
+                <span>Developed by ChatSphere Team</span>
+            </footer>
+
+        </main>
+
+    </div>
+
+
+    <!-- GROUP: CREATE OR ADD MEMBERS -->
+    <div class="modal" id="groupModal" hidden>
+
+        <div class="modal-card">
+
+            <h3 id="groupModalTitle">New group</h3>
+
+            <label class="modal-field" id="groupNameLabel">
+                Group name
+                <input type="text" id="groupName" maxlength="80" placeholder="For example, Study Circle">
+            </label>
+
+            <label class="modal-field">
+                Find people
+                <input type="search" id="groupSearch" placeholder="Search people by name...">
+            </label>
+
+            <div class="picker-chips" id="groupChips"></div>
+
+            <div class="picker-results" id="groupResults"></div>
+
+            <p class="modal-message" id="groupMessage"></p>
+
+            <div class="modal-actions">
+                <button type="button" class="btn-secondary" id="cancelGroupBtn">Cancel</button>
+                <button type="button" id="saveGroupBtn">Create group</button>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- GROUP INFO: MEMBERS, ADD, REMOVE, LEAVE -->
+    <div class="modal" id="groupInfoModal" hidden>
+
+        <div class="modal-card">
+
+            <h3 id="groupInfoTitle"></h3>
+            <p class="modal-subtitle" id="groupInfoMeta"></p>
+
+            <div class="member-list" id="memberList"></div>
+
+            <p class="modal-message" id="groupInfoMessage"></p>
+
+            <div class="modal-actions">
+                <button type="button" id="addMembersBtn">Add members</button>
+                <button type="button" class="btn-danger" id="leaveGroupBtn">Leave group</button>
+                <button type="button" class="btn-secondary" id="closeGroupInfoBtn">Close</button>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- INCOMING CALL -->
+    <div class="call-overlay" id="incomingCall" hidden>
+
+        <div class="call-card">
+
+            <img id="incomingAvatar" alt="Caller">
+            <h3 id="incomingName"></h3>
+            <p id="incomingKind"></p>
+
+            <div class="call-actions">
+                <button type="button" class="call-btn decline" id="declineCallBtn" title="Decline">
+                    <i class="fas fa-phone-slash"></i>
+                </button>
+
+                <button type="button" class="call-btn accept" id="acceptCallBtn" title="Accept">
+                    <i class="fas fa-phone"></i>
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- CALL SCREEN -->
+    <div class="call-screen" id="callScreen" hidden>
+
+        <video id="remoteVideo" autoplay playsinline></video>
+        <video id="localVideo" autoplay playsinline muted></video>
+
+        <div class="call-center">
+            <img id="callAvatar" alt="">
+            <h3 id="callName"></h3>
+            <p id="callStatusText"></p>
+        </div>
+
+        <div class="call-controls">
+
+            <button type="button" id="muteCallBtn" title="Mute">
+                <i class="fas fa-microphone"></i>
+            </button>
+
+            <button type="button" id="cameraCallBtn" title="Camera">
+                <i class="fas fa-video"></i>
+            </button>
+
+            <button type="button" class="call-btn decline" id="hangUpBtn" title="End call">
+                <i class="fas fa-phone-slash"></i>
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- SHORT MESSAGES -->
+    <div class="toast" id="toast" hidden></div>
+
+
+    <!-- SUPABASE CLIENT + DASHBOARD SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/crypto.js"></script>
+    <script src="js/media.js"></script>
+    <script src="js/emoji.js"></script>
+    <script src="js/calls.js"></script>
+    <script src="js/script.js"></script>
+
+</body>
+</html>
